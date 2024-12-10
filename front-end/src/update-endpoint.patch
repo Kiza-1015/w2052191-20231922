@@ -1,0 +1,25 @@
+--- App.jsx
++++ App.jsx
+@@ -13,7 +13,15 @@
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+-      const response = await fetch("API_ENDPOINT", {
++      const response = await fetch("http://localhost:8070/api/tickets/processEvent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+-       body: JSON.stringify(formValues),
++       body: JSON.stringify({
++         ticketPoolMaxCapacity: formValues.maxCapacity,
++         totalTickets: formValues.totalTickets,
++         releaseRate: formValues.releaseRate,
++         retrievalRate: formValues.retrievalRate,
++         quantity: formValues.quantity,
++       }),
+      });
+      if (!response.ok) throw new Error("Failed to run simulation");
+      const result = await response.json();
+
+
+
+      
